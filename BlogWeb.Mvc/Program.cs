@@ -1,4 +1,5 @@
 using BlogWeb.Mvc;
+using BlogWeb.Mvc.Middlewares;
 using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MVCApplicationRegistration();
+
+app.UseRequestLogging(Path.Combine(Directory.GetCurrentDirectory(), "Logs", $"{DateTime.UtcNow:yyyyMMdd}.log"));
+
 
 app.UseAuthentication();
 

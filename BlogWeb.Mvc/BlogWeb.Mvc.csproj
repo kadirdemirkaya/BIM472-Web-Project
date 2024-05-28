@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Folder Include="Logs\" />
 		<Folder Include="wwwroot\images\" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />

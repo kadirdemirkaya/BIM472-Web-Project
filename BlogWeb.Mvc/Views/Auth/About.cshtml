@@ -230,23 +230,35 @@
                     <li style="list-style:none;display:center;margin-right: 10px;">@userClaimModel.ClaimValue</li>
                 </ul>
             }
-            <div style="list-style:none;display:center;margin-right: 10px;">
-                @if (userClaimModel.ClaimType == "IH")
-                {
-                    string[] parts = userClaimModel.ClaimValue.Split(' ');
-                    string linkUrl = parts[0].Substring(3); // "IH:" kısmını kaldırıyoruz
-                    string imageUrl = parts[1].Substring(2); // "I:" kısmını kaldırıyoruz
+            @*    <div style="list-style:none;display:center;margin-right: 10px;">
+        @if (userClaimModel.ClaimType == "IH")
+        {
+        string[] parts = userClaimModel.ClaimValue.Split(' ');
+        string linkUrl = parts[0].Substring(3); // "IH:" kısmını kaldırıyoruz
+        string imageUrl = parts[1].Substring(2); // "I:" kısmını kaldırıyoruz
 
-                    <div class="social-links">
-                        <a href="@linkUrl" target="_blank">
-                            <img src="/@imageUrl" width="100px" height="60px" alt="Linkedin">
-                        </a>
-                    </div>
-                }
-            </div>
+        <div class="social-links">
+        <a href="@linkUrl" target="_blank">
+        <img src="/@imageUrl" width="100px" height="60px" alt="Linkedin">
+        </a>
+        </div>
         }
+        </div> *@
+        }
+        <div style="list-style:none;display:center;margin-right: 10px;">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/kadirdemirkaya/ I:images/linkedin.png" target="_blank">
+                    <img src="~/images/linkedin.png" width="100px" height="60px" alt="Linkedin">
+                </a>
+                <a href="https://github.com/kadirdemirkaya" target="_blank">
+                    <img src="~/images/github.png" width="100px" height="60px" alt="Linkedin">
+                </a>
+                <a href="mailto:kadirkdr5555@gmail.com I:images/linkedin.png" target="_blank">
+                    <img src="~/images/mail.png" width="100px" height="60px" alt="Linkedin">
+                </a>
+            </div>
+        </div>
     </div>
 </body>
 
 </html>
- 
