@@ -1,0 +1,124 @@
+﻿@using System.Security.Claims
+@using BlogWeb.Mvc.Models.Enums
+ @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - BlogWeb.Mvc</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        /* header style */
+        header {
+            border-bottom: 0.25px solid #333;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* gövde style'ı */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1;
+            background-color: #1a1a1a;
+            color: white;
+            background-image: url('/images/arkaplan.jpg'); /* Buraya arka plan resminizin yolunu ekleyin */
+            background-size: cover; /* Resmin sayfayı tamamen kaplamasını sağlar */
+            background-position: center; /* Resmin ortalanmasını sağlar */
+            background-repeat: no-repeat; /* Resmin tekrarlanmamasını sağlar */
+        }
+
+        /* alt kısmın footer style)ı*/
+        footer {
+            border-top: 0.25px solid #333;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 20px 10px 10px 10px;
+            position: fixed; /* Footer'ı sabitle */
+            width: 100%; /* Genişlik %100 */
+            bottom: 0; /* En altta sabitle */
+        }
+
+        /* üst bar için style */
+        nav {
+            padding-top: 10px;
+            display: flex; /* yatay olarak hizalama */
+            flex-wrap: wrap; /* Küçük ekranlarda yan yana görüntülemek için */
+            justify-content: center; /* öğeleri ortala */
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            flex-wrap: wrap; /* Küçük ekranlarda yan yana görüntülemek için */
+            justify-content: center; /* öğeleri ortala */
+        }
+
+            .nav-left a, .nav-right a {
+                color: white;
+                text-decoration: none; /* Metin altı çizgisini kaldırır */
+                margin: 5px;
+                padding: 5px;
+                font-size: 19px;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                <a asp-area="" asp-controller="Auth" asp-action="About">Hakkımda</a>
+                <a asp-area="" asp-controller="Project" asp-action="GetAllProject">Projelerim</a>
+            </div>
+            <div class="nav-right">
+                @if (!HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+                {
+                    <a asp-area="" asp-controller="Auth" asp-action="Login">Giriş Yap</a>
+                }
+                <a asp-area="" asp-controller="Auth" asp-action="Register">Kayıt Ol</a>
+                @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+                {
+                    <a asp-area="" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a>
+                }
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="pb-3">
+        @*      @{
+        string emailVal;
+        var emailClaim = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+
+        if (emailClaim != null)
+        {
+        emailVal = emailClaim.Value;
+        if (emailVal.Contains(":"))
+        {
+        emailVal = emailVal.Split(':')[1].Trim();
+        }
+        }
+        else
+        {
+        emailVal = string.Empty;
+        }
+        }
+        <input type="hidden" id="userEmail" value="@emailVal" /> *@
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>Telif Hakkı &copy; 2024 - Benim Blogum</p>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>

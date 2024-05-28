@@ -1,0 +1,144 @@
+﻿@using BlogWeb.Mvc.Models.ViewModels.Article
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<ArticleModel>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benim Blogum</title>
+    <style>
+        /* card-container'ın style'ı */
+        .card-container {
+            display: flex; /*kartları dikey olarak sıralamak*/
+            flex-direction: column; /*Kartların alt alta sıralanmasını*/
+            align-items: center;
+            gap: 20px; /*Kartlar arasındaki boşluğu*/
+            padding: 20px;
+            margin-top: 3%;
+        }
+
+        /* card div'inin style'ı */
+        .card {
+            width: 36%;
+            border: 1px solid #ccc; /* Kare çerçeve */
+            border-width: 0.5px; /* Border kalınlığını ayarlar */
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #1a1a1a; /* Siyahın hafif gri tonu */
+            color: white; /* Yazı rengi beyaz */
+            transition: transform 0.3s;
+        }
+            /* hover özelliği*/
+            .card:hover {
+                transform: scale(1.05);
+            }
+
+        /* kart içeriğinin style'ı */
+        .card-content {
+            display: flex;
+            flex-direction: column; /* İçeriği alt alta sıralamak için */
+            align-items: center; /* İçeriği yatayda ortalamak için */
+            color: white; /* Yazı rengi beyaz */
+        }
+
+        /* kart çerçeve özelliği */
+        .card iframe {
+            width: 300px; /* Kartın maksimum genişliğini belirler */
+            height: 200px;
+        }
+
+        /* card-info div'indeki title ve description style'ı */
+        .card-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+            .card-info h2 {
+                margin-bottom: 10px;
+                font-size: 20px;
+                color: aqua;
+            }
+
+            .card-info p {
+                width: 400px;
+                font-size: 16px;
+                color: white;
+            }
+
+        /* resim etiketinin özelliği */
+        img {
+            grid-area: image;
+            max-width: 100%;
+            height: auto;
+        }
+
+
+        /* kategori özelliği*/
+        .category-list {
+            display: flex; /* öğeleri yatay olarak hizalamak */
+            justify-content: center;
+            list-style-type: none;
+            margin: 25px;
+            padding: 0;
+        }
+
+            .category-list li {
+                margin: 0 24px; /* Sağ ve sol margin ayarlandı */
+                padding: 10px; /* İç padding artırıldı */
+                transition: transform 0.2s ease-in-out; /* Hareket efekti için geçiş tanımlandı */
+            }
+
+                .category-list li:hover {
+                    transform: scale(1.05); /* Üzerine gelindiğinde hafif büyüme efekti */
+                }
+
+                .category-list li a {
+                    text-decoration: none; /* Alt çizgiyi kaldırır */
+                    color: cadetblue; /* Başlık rengi güncellendi */
+                    font-size: 22px;
+                }
+
+                    .category-list li a:hover {
+                        text-decoration: none; /* Alt çizgiyi kaldırır */
+                        color: aqua;
+                    }
+    </style>
+</head>
+
+<div class="container">
+    <h2 style="text-align: center; margin-top:3%; color:aqua;">Makaleler</h2>
+
+    <ul class="category-list">
+        <li><a asp-controller="Home" asp-action="Index" asp-route-category="all" class="category-link">Tümü</a></li>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-category="html" class="category-link">HTML</a></li>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-category="css" class="category-link">CSS</a></li>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-category="backend" class="category-link">Backend</a></li>
+    </ul>
+
+    <div class="card-container">
+        @foreach (var article in Model)
+        {
+            <div class="card">
+                <div class="card-content">
+                    <a href="@Url.Action("GetAllArticleDetail", "Article", new { articleId = article.Id })">
+                        <img src="@article.ImagePath" alt="@article.Title" width="450" height="200">
+                    </a>
+                    <div class="card-info">
+                        <h2>@article.Title</h2>
+                        <p>@article.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+</html>

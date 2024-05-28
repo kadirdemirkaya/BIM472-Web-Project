@@ -1,0 +1,127 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using BlogWeb.Mvc.Models.ViewModels.Comments
+@model List<CommentViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makale Yorumları</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Siyahın hafif gri tonu */
+            color: #333; /* Metin rengi */
+            margin: 0;
+            padding: 0;
+        }
+
+        .article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff; /* Makale arka plan rengi */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Gölge */
+            margin-top: 20px;
+        }
+
+        .comments {
+            margin-top: 40px;
+        }
+
+        .comment-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 5px; /* Kenar yuvarlama */
+            overflow: hidden; /* İçeriği saran çerçeveyle sınırlı içerikleri gizle */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Gölgelendirme */
+        }
+
+        .comment {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .comment-info {
+            font-size: 0.9em;
+            color: beige;
+        }
+
+        .comment-text {
+            margin-top: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: white;
+            font-weight: bold;
+        }
+
+        .comment-form {
+            margin-top: 30px;
+        }
+
+            .comment-form input,
+            .comment-form textarea {
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 8px;
+                border: 1px solid #ddd;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .comment-form button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+                .comment-form button:hover {
+                    background-color: #0056b3;
+                }
+    </style>
+</head>
+<body>
+    <br>
+    <section class="comments">
+        <br />
+        @if (Model.Any())
+        {
+            <h2 style="color:white; margin-bottom:4%;">Yorumlar</h2>
+        }
+        else
+        {
+            <h2>Şuan için yorum Yok</h2>
+        }
+        <ul class="comment-list">
+            @foreach (var comment in Model)
+            {
+                <li class="comment">
+                    <div class="comment-info">
+                        <span class="comment-author">@comment.UserName</span>
+                        <span class="comment-date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
+                    </div>
+                    <p class="comment-text">@comment.CommentText</p>
+                </li>
+            }
+        </ul>
+        <br />
+        @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+            <form asp-action="AddCommentByArticle" asp-controller="Comment" method="post" class="comment-form">
+                <h3>Yorum Yap</h3>
+                <input type="hidden" name="articleId" value="@Model.FirstOrDefault()?.ArticleId" />
+                <textarea name="comment" placeholder="Yorumunuz" required></textarea>
+                <button type="submit">Yorum Yap</button>
+            </form>
+        }
+    </section>
+</body>
+</html>

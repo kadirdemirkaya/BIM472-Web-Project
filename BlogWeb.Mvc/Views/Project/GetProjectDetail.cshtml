@@ -1,0 +1,290 @@
+﻿@* 
+
+@using BlogWeb.Mvc.Models.Enums
+@using BlogWeb.Mvc.Models.ViewModels.Project
+
+@model ProjectModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Pattern</title>
+    <style>
+        .project-detail-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .project-header {
+            text-align: center;
+        }
+
+            .project-header h1 {
+                font-size: 2.5em;
+                margin-bottom: 10px;
+                color: white;
+            }
+
+        .project-status {
+            font-size: 1.2em;
+            color: #888;
+        }
+
+        .project-content {
+            color: white; 
+            background-color: #1a1a1a; 
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .project-info {
+            flex: 2;
+            padding-right: 20px;
+        }
+
+        .project-description, .project-detail {
+            margin-bottom: 30px;
+        }
+
+            .project-description h2, .project-detail h2 {
+                font-size: 1.5em;
+                margin-bottom: 30px;
+                color: aqua;
+                margin-top: 7%;
+            }
+
+            .project-description p, .project-detail p {
+                margin-bottom: 30px;
+            }
+
+            .project-detail h3 {
+                font-size: 1.2em;
+                margin-bottom: 30px;
+                color: aqua;
+            }
+
+        .project-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .project-image img {
+                margin-top: 26%;
+                margin-bottom: 20%;
+                margin-right: 70%;
+                height: auto; 
+                width: 170%;
+            }
+
+        .detail-image {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <br />
+    <br />
+    <div class="project-detail-container">
+        <div class="project-header">
+            <h1 style="color:aqua;">@Model.Topic</h1>
+            @if (@Model.ProjectStatus == ProjectStatus.Completed)
+            {
+                <p class="project-status" style="color:green">@Model.ProjectStatus.ToString()</p>
+            }
+            else
+            {
+                <p class="project-status" style="color:red">@Model.ProjectStatus.ToString()</p>
+            }
+        </div>
+        <div class="project-content">
+            <div class="project-info">
+                <div class="project-description">
+                    <h2>Description</h2>
+                    <p>@Model.Description</p>
+                </div>
+                <div class="project-detail">
+                    <h2>Project Details</h2>
+                    <h3>Goals</h3>
+                    <p>@Model.ProjectDetail.Goals</p>
+                    <h3>Technologies Used</h3>
+                    <p>@Model.ProjectDetail.TechnologiesUsed</p>
+                    <h3>Links</h3>
+                    <p>@Model.ProjectDetail.Links</p>
+                </div>
+            </div>
+            <div class="project-image">
+                <img src="/@Url.Content(Model.ImagePath)" alt="@Model.Topic" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+ *@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@using BlogWeb.Mvc.Models.Enums
+@using BlogWeb.Mvc.Models.ViewModels.Project
+
+@model ProjectModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Pattern</title>
+    <style>
+        .project-detail-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .project-header {
+            text-align: center;
+        }
+
+        .project-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .project-status {
+            font-size: 1.2em;
+            color: #888;
+        }
+
+        .project-content {
+            color: white;
+            background-color: #1a1a1a;
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .project-info {
+            flex: 2;
+            padding-right: 20px;
+        }
+
+        .project-description, .project-detail {
+            margin-bottom: 30px;
+        }
+
+        .project-description h2, .project-detail h2 {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: aqua;
+            margin-top: 7%;
+        }
+
+        .project-description p, .project-detail p {
+            margin-bottom: 30px;
+        }
+
+        .project-detail h3 {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: aqua;
+        }
+
+        .project-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end; /* Resmi sağa hizalar */
+            align-items: center;
+            max-height: 100%; /* Yüksekliğin kapsayıcıyı aşmasını önler */
+        }
+
+        .project-image img {
+            width: 800px; /* Konteynerin genişliğini tamamen kaplar */
+            height: 530px; /* Konteynerin yüksekliğini tamamen kaplar */
+            object-fit: cover; /* Resmi keserek konteynırın tamamını doldurur */
+        }
+
+        .detail-image {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <br />
+    <br />
+    <div class="project-detail-container">
+        <div class="project-header">
+            <h1 style="color:aqua;">@Model.Topic</h1>
+            @if (@Model.ProjectStatus == ProjectStatus.Completed)
+            {
+                <p class="project-status" style="color:green">@Model.ProjectStatus.ToString()</p>
+            }
+            else
+            {
+                <p class="project-status" style="color:red">@Model.ProjectStatus.ToString()</p>
+            }
+        </div>
+        <div class="project-content">
+            <div class="project-info">
+                <div class="project-description">
+                    <h2>Description</h2>
+                    <p>@Model.Description</p>
+                </div>
+                <div class="project-detail">
+                    <h2>Project Details</h2>
+                    <h3>Goals</h3>
+                    <p>@Model.ProjectDetail.Goals</p>
+                    <h3>Technologies Used</h3>
+                    <p>@Model.ProjectDetail.TechnologiesUsed</p>
+                    <h3>Links</h3>
+                    <p><a href="@Model.ProjectDetail.Links">@Model.ProjectDetail.Links</a></p>
+                </div>
+            </div>
+            <div class="project-image">
+                <img src="/@Url.Content(Model.ImagePath)" alt="@Model.Topic" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

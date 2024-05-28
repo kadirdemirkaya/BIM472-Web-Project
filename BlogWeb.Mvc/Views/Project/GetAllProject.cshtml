@@ -1,0 +1,104 @@
+﻿@using BlogWeb.Mvc.Models.Enums
+@using BlogWeb.Mvc.Models.ViewModels.Project
+@{
+    Layout = "_Layout";
+}
+
+@model List<ProjectModel>
+
+<style>
+    /* kartların genel özelliği */
+    .project-grid {
+        display: flex; /* yatay hizalama */
+        flex-wrap: wrap; /* konteynırın boyutu öğelerin boyutlarından büyükse, öğeler bir sonraki satıra kayar */
+        gap: 30px; /* Öğeler arasında 30 piksel boşluk */
+        justify-content: center;
+        padding: 0 15px; /* Sol ve sağ kenarlara padding ekle */
+    }
+
+    /* her kartın mözelliği */
+    .project-item {
+        box-sizing: border-box; /* kenarlık ve dolgu, öğenin belirlediği genişlik ve yükseklik değerlerine dahil edilir */
+        border: 1px solid #ccc;
+        width: calc(33.33% - 30px); /* Kart genişliği ve aralarındaki boşluk için */
+        padding: 10px;
+        border-radius: 10px; /* Köşeleri yuvarlatma */
+        overflow: hidden; /* Köşelerin içeri taşan kısmı kesmesi için */
+        transition: transform 0.3s, box-shadow 0.3s; /* Hover efekti için geçiş süresi */
+    }
+
+        /* kartın hover özelliği */
+        .project-item:hover {
+            transform: scale(1.05); /* Hafif büyüme efekti */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
+        }
+
+
+
+    /*     .project-content {
+            padding: 0px;
+        } */
+    /* kart resminin özellikleri*/
+    .project-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover; /* resmin boyutunu ve oranı korunurken öğenin tamamını kaplamasını sağlar */
+        border-top-left-radius: 10px; /* köşelere yuvarlak kenar */
+        border-top-right-radius: 10px; /* köşelere yuvarlak kenar */
+    }
+
+    h2 {
+        text-align: center;
+        color: aqua;
+    }
+
+    /* responsive için genişlik ayarlaması */
+    media (max-width: 768px) {
+        .project-item
+
+    {
+        width: calc(50% - 30px); /* Kartların genişliği 100% olacak şekilde ayarlanır */
+    }
+
+    }
+
+    /* buton görevi gören a tag'i özelliği*/
+    .container {
+        display: flex; /*sırala*/
+        justify-content: center; /* Yatay olarak ortalar */
+        /*         align-items: center; /* Dikey olarak ortalar */ */
+    }
+
+</style>
+
+<br />
+<br />
+<h2>Benim Projelerim</h2>
+<br />
+<br />
+<br />
+<div class="project-grid">
+    @foreach (var project in Model)
+    {
+        <div class="project-item">
+            <div class="project-content">
+                <img src="/@project.ImagePath" alt="@project.Topic" class="project-image" />
+                <br />
+                <br />
+                <h2>@project.Topic</h2>
+                <p>Açıklama: @project.Description</p>
+                @if (project.ProjectStatus == ProjectStatus.Completed)
+                {
+                    <p style="color:green">Status: @project.ProjectStatus</p>
+                }
+                else
+                {
+                    <p style="color:red">Status: @project.ProjectStatus</p>
+                }
+                <div class="container">
+                    <a href="@Url.Action("GetProjectDetail", "Project", new { projectId = project.Id })" class="btn btn-primary">Detaylı Bak</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
