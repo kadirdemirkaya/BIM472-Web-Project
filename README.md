@@ -4,7 +4,7 @@
 Bu proje BIM472 dersi için geliştirilmiş kişisel bir blog sitesidir.
 
 - .Net Core MVC ile geliştirilmiştir.
-- Authentication ve Authorizaiton ile güvenlik sağlanmıştır.
+- Authentication ve Authorization ile güvenlik sağlanmıştır.
 - CQRS - MediatR uygulanmıştır.
 - File içeriği ile isteklere Log'lanmıştır.
 
