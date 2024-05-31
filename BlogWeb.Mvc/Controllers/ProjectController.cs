@@ -10,6 +10,10 @@ namespace BlogWeb.Mvc.Controllers
     [AllowAnonymous]
     public class ProjectController(IMediator _mediator) : BaseController
     {
+        /// <summary>
+        /// Tüm projelerin geldiği uçnokta
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAllProject")]
         public async Task<IActionResult> GetAllProject()
@@ -20,6 +24,11 @@ namespace BlogWeb.Mvc.Controllers
             return View(projectModels);
         }
 
+        /// <summary>
+        /// Projenin detaylarının getirildiği uçnokta
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetProjectDetail")]
         public async Task<IActionResult> GetProjectDetail(Guid projectId)

@@ -1,6 +1,4 @@
-﻿@* 
-
-@using BlogWeb.Mvc.Models.Enums
+﻿@using BlogWeb.Mvc.Models.Enums
 @using BlogWeb.Mvc.Models.ViewModels.Project
 
 @model ProjectModel
@@ -9,282 +7,192 @@
     Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-<html lang="tr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategy Pattern</title>
-    <style>
-        .project-detail-container {
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: 10px;
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
+<style>
+    * {
+        box-sizing: border-box; /* Tüm öğelerin iç ve dış boyutlarını hesaba katar. */
+        line-height: 1.5; /* Satır yüksekliğini metin boyutunun 1.5 katı olarak ayarlar. */
+        font-family: 'Open Sans', sans-serif; /* Tüm metinlerin "Open Sans" veya benzeri sans-serif fontunu kullanmasını sağlar. */
+    }
 
-        .project-header {
-            text-align: center;
-        }
+    /* resimlerin özellikleri */
+    img {
+        max-width: 100%; /* Resimlerin maksimum genişliğini %100 olarak ayarlar, böylece sayfa içinde doğru şekilde ölçeklenir. */
+    }
 
-            .project-header h1 {
-                font-size: 2.5em;
-                margin-bottom: 10px;
-                color: white;
-            }
+    /* container div özellikleri */
+    .container {
+        display: flex; /* Öğeleri bir konteyner içinde esnek bir düzen oluşturur. */
+        align-items: center; /* İçerideki öğeleri dikey eksende (y ekseni) ortalar. */
+        justify-content: center; /* İçerideki öğeleri yatay eksende (x ekseni) ortalar. */
+        height: 100vh; /* Konteynerin yüksekliğini ekran yüksekliğinin tamamına (%100) eşitler. */
+    }
 
-        .project-status {
-            font-size: 1.2em;
-            color: #888;
-        }
+    /* card div özellikeri */
+    .card {
+        position: relative;
+        background: #333;
+        width: 900px;
+        height: 100vh;
+        border-radius: 6px;
+        padding: 2rem;
+        color: #aaa;
+        box-shadow: 0 .25rem .25rem rgba(0,0,0,0.2), 0 0 1rem rgba(0,0,0,0.2); /* Kartın gölgelendirme efektlerini belirler. */
+        overflow: hidden;
+        &__image-container /* Resim konteynerine dış boşluk ekler. */
 
-        .project-content {
-            color: white; 
-            background-color: #1a1a1a; 
-            display: flex;
-            align-items: flex-start;
-            padding: 20px;
-            gap: 30px;
-        }
+    {
+        margin: -2rem -2rem 1rem -2rem;
+    }
 
-        .project-info {
-            flex: 2;
-            padding-right: 20px;
-        }
+    .card__content {
+        font-size: 14px;
+    }
 
-        .project-description, .project-detail {
-            margin-bottom: 30px;
-        }
+    /* card__title div özelliği */
+    .card__title {
+        font-size: 24px;
+    }
 
-            .project-description h2, .project-detail h2 {
-                font-size: 1.5em;
-                margin-bottom: 30px;
-                color: aqua;
-                margin-top: 7%;
-            }
+    .card__content p {
+        margin-top: 10px;
+    }
 
-            .project-description p, .project-detail p {
-                margin-bottom: 30px;
-            }
+    .card__image-container img {
+        max-width: 100%;
+        height: auto;
+    }
 
-            .project-detail h3 {
-                font-size: 1.2em;
-                margin-bottom: 30px;
-                color: aqua;
-            }
 
-        .project-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
 
-            .project-image img {
-                margin-top: 26%;
-                margin-bottom: 20%;
-                margin-right: 70%;
-                height: auto; 
-                width: 170%;
-            }
 
-        .detail-image {
-            margin-top: 20px;
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-</head>
+    &__line {
+        opacity: 0;
+        animation: LineFadeIn .8s .8s forwards ease-in;
+    }
 
-<body>
-    <br />
-    <br />
-    <div class="project-detail-container">
-        <div class="project-header">
-            <h1 style="color:aqua;">@Model.Topic</h1>
-            @if (@Model.ProjectStatus == ProjectStatus.Completed)
-            {
-                <p class="project-status" style="color:green">@Model.ProjectStatus.ToString()</p>
-            }
-            else
-            {
-                <p class="project-status" style="color:red">@Model.ProjectStatus.ToString()</p>
-            }
+    &__image {
+        opacity: 0;
+        animation: ImageFadeIn .8s 1.4s forwards;
+    }
+
+    &__title {
+        color: white; /* Başlık metnin rengini beyaz olarak ayarlar. */
+        margin-top: 0; /* Başlık için üst boşluk eklememez. */
+        font-weight: 800; /* Başlık metnin kalınlığını belirler. */
+        letter-spacing: 0.01em; /* Başlık metin aralığını ayarlar. */
+    }
+
+    &__content {
+        margin-top: -1rem; /* İçerik metni için üst boşluk ekler. */
+        opacity: 0; /* İçerik metninin başlangıç opaklığını sıfır olarak ayarlar. */
+        animation: ContentFadeIn .8s 1.6s forwards; /* İçerik metnini görünür kılmak için bir animasyon belirler. */
+    }
+
+    &__svg {
+        position: absolute;
+        left: 0;
+        top: 115px;
+    }
+
+    }
+
+    keyframes LineFadeIn {
+        0%
+
+    {
+        opacity: 0;
+        d: path("M 0 300 Q 0 300 0 300 Q 0 300 0 300 C 0 300 0 300 0 300 Q 0 300 0 300 ");
+        stroke: #fff;
+    }
+
+    50% {
+        opacity: 1;
+        d: path("M 0 300 Q 50 300 100 300 Q 250 300 350 300 C 350 300 500 300 650 300 Q 750 300 800 300");
+        stroke: #888BFF;
+    }
+
+    100% {
+        opacity: 1;
+        d: path("M -2 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 802 400");
+        stroke: #545581;
+    }
+
+    }
+
+    keyframes ContentFadeIn {
+        0%
+
+    {
+        transform: translateY(-1rem);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    }
+
+    keyframes ImageFadeIn {
+        0%
+
+    {
+        transform: translate(-.5rem, -.5rem) scale(1.05);
+        opacity: 0;
+        filter: blur(2px);
+    }
+
+    50% {
+        opacity: 1;
+        filter: blur(2px);
+    }
+
+    100% {
+        transform: translateY(0) scale(1.0);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    }
+
+    /* h1 renk düzeni */
+    h1 {
+        color: aqua;
+    }
+
+    /* p renk düzeni */
+    p {
+        color: white;
+    }
+
+    /* strong renk düzeni */
+    strong {
+        color: aqua;
+    }
+</style>
+<div class="container">
+    <div class="card">
+        <div class="card__image-container">
+            <img class="card__image" style="width:1000px;height:400px;" src="/@Model.ImagePath" alt="">
         </div>
-        <div class="project-content">
-            <div class="project-info">
-                <div class="project-description">
-                    <h2>Description</h2>
-                    <p>@Model.Description</p>
-                </div>
-                <div class="project-detail">
-                    <h2>Project Details</h2>
-                    <h3>Goals</h3>
-                    <p>@Model.ProjectDetail.Goals</p>
-                    <h3>Technologies Used</h3>
-                    <p>@Model.ProjectDetail.TechnologiesUsed</p>
-                    <h3>Links</h3>
-                    <p>@Model.ProjectDetail.Links</p>
-                </div>
-            </div>
-            <div class="project-image">
-                <img src="/@Url.Content(Model.ImagePath)" alt="@Model.Topic" />
-            </div>
-        </div>
-    </div>
-</body>
 
-</html>
- *@
+        @*
+        <svg class="card__svg" viewBox="0 0 800 500">
+        </svg>
+        *@
 
+        <br />
+        <br />
+        <br />
 
-
-
-
-
-
-
-
-
-
-
-
-
-@using BlogWeb.Mvc.Models.Enums
-@using BlogWeb.Mvc.Models.ViewModels.Project
-
-@model ProjectModel
-
-@{
-    Layout = "_Layout";
-}
-
-<!DOCTYPE html>
-<html lang="tr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategy Pattern</title>
-    <style>
-        .project-detail-container {
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: 10px;
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
-
-        .project-header {
-            text-align: center;
-        }
-
-        .project-header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .project-status {
-            font-size: 1.2em;
-            color: #888;
-        }
-
-        .project-content {
-            color: white;
-            background-color: #1a1a1a;
-            display: flex;
-            align-items: flex-start;
-            padding: 20px;
-            gap: 30px;
-        }
-
-        .project-info {
-            flex: 2;
-            padding-right: 20px;
-        }
-
-        .project-description, .project-detail {
-            margin-bottom: 30px;
-        }
-
-        .project-description h2, .project-detail h2 {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            color: aqua;
-            margin-top: 7%;
-        }
-
-        .project-description p, .project-detail p {
-            margin-bottom: 30px;
-        }
-
-        .project-detail h3 {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            color: aqua;
-        }
-
-        .project-image {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end; /* Resmi sağa hizalar */
-            align-items: center;
-            max-height: 100%; /* Yüksekliğin kapsayıcıyı aşmasını önler */
-        }
-
-        .project-image img {
-            width: 800px; /* Konteynerin genişliğini tamamen kaplar */
-            height: 530px; /* Konteynerin yüksekliğini tamamen kaplar */
-            object-fit: cover; /* Resmi keserek konteynırın tamamını doldurur */
-        }
-
-        .detail-image {
-            margin-top: 20px;
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-</head>
-
-<body>
-    <br />
-    <br />
-    <div class="project-detail-container">
-        <div class="project-header">
-            <h1 style="color:aqua;">@Model.Topic</h1>
-            @if (@Model.ProjectStatus == ProjectStatus.Completed)
-            {
-                <p class="project-status" style="color:green">@Model.ProjectStatus.ToString()</p>
-            }
-            else
-            {
-                <p class="project-status" style="color:red">@Model.ProjectStatus.ToString()</p>
-            }
-        </div>
-        <div class="project-content">
-            <div class="project-info">
-                <div class="project-description">
-                    <h2>Description</h2>
-                    <p>@Model.Description</p>
-                </div>
-                <div class="project-detail">
-                    <h2>Project Details</h2>
-                    <h3>Goals</h3>
-                    <p>@Model.ProjectDetail.Goals</p>
-                    <h3>Technologies Used</h3>
-                    <p>@Model.ProjectDetail.TechnologiesUsed</p>
-                    <h3>Links</h3>
-                    <p><a href="@Model.ProjectDetail.Links">@Model.ProjectDetail.Links</a></p>
-                </div>
-            </div>
-            <div class="project-image">
-                <img src="/@Url.Content(Model.ImagePath)" alt="@Model.Topic" />
-            </div>
+        <div class="card__content">
+            <h1 class="card__title">@Model.ProjectDetail.Topic</h1>
+            <p><strong>Açıklama : </strong>@Model.ProjectDetail.Description</p>
+            <p><strong>Kazanımlar :</strong> @Model.ProjectDetail.Goals</p>
+            <p><strong>Kullanılan Teknolojiler :</strong> @Model.ProjectDetail.TechnologiesUsed</p>
+            <p><strong>Linkler :</strong><a href="@Model.ProjectDetail.Links"> @Model.ProjectDetail.Links</a></p>
         </div>
     </div>
-</body>
-
-</html>
+</div>

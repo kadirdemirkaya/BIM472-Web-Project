@@ -13,6 +13,11 @@ namespace BlogWeb.Mvc.Controllers
     [AllowAnonymous]
     public class ArticleController(IMediator _mediatr) : BaseController
     {
+        /// <summary>
+        /// Tüm ilanları getirir
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAllArticles")]
         public async Task<IActionResult> GetAllArticles(string? category = null)
@@ -47,6 +52,11 @@ namespace BlogWeb.Mvc.Controllers
             return View(articleModel);
         }
 
+        /// <summary>
+        /// seçilen makalenin detaylarını getirir
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAllArticleDetail")]
         public async Task<IActionResult> GetAllArticleDetail(Guid articleId)

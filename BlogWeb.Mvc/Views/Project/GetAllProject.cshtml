@@ -1,104 +1,191 @@
-﻿@using BlogWeb.Mvc.Models.Enums
-@using BlogWeb.Mvc.Models.ViewModels.Project
-@{
-    Layout = "_Layout";
-}
+﻿<style>
 
-@model List<ProjectModel>
-
-<style>
-    /* kartların genel özelliği */
-    .project-grid {
-        display: flex; /* yatay hizalama */
-        flex-wrap: wrap; /* konteynırın boyutu öğelerin boyutlarından büyükse, öğeler bir sonraki satıra kayar */
-        gap: 30px; /* Öğeler arasında 30 piksel boşluk */
-        justify-content: center;
-        padding: 0 15px; /* Sol ve sağ kenarlara padding ekle */
+    /* article etiketi özellikleri */
+    article {
+        margin-top: 10px;
+        --img-scale: 1.001;
+        --title-color: black;
+        --link-icon-translate: -20px;
+        --link-icon-opacity: 0;
+        position: relative;
+        border-radius: 16px;
+        box-shadow: none;
+        background: #fff;
+        transform-origin: center; /* dönüşüm işlemlerinin hangi noktadan başlayacağını belirler */
+        transition: all 0.4s ease-in-out; /* öğenin tüm stil değişikliklerinin */
+        overflow: hidden; /* boyutu aşarsa içeriği gizler */
     }
 
-    /* her kartın mözelliği */
-    .project-item {
-        box-sizing: border-box; /* kenarlık ve dolgu, öğenin belirlediği genişlik ve yükseklik değerlerine dahil edilir */
-        border: 1px solid #ccc;
-        width: calc(33.33% - 30px); /* Kart genişliği ve aralarındaki boşluk için */
-        padding: 10px;
-        border-radius: 10px; /* Köşeleri yuvarlatma */
-        overflow: hidden; /* Köşelerin içeri taşan kısmı kesmesi için */
-        transition: transform 0.3s, box-shadow 0.3s; /* Hover efekti için geçiş süresi */
-    }
-
-        /* kartın hover özelliği */
-        .project-item:hover {
-            transform: scale(1.05); /* Hafif büyüme efekti */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
+        article a::after {
+            position: absolute;
+            inset-block: 0; /* Üst ve alt kenarların (block direction) konumunu 0 yapar. */
+            inset-inline: 0; /* Sol ve sağ kenarların (inline direction) konumunu 0 yapar. */
+            cursor: pointer; /* İmleci, tıklanabilir bir el simgesine dönüştürür. */
+            content: ""; /* İçeriği boş bir dize olarak ayarlar, genellikle ::before ve ::after pseudo-elementleri ile kullanılır. */
         }
 
+        /* basic article elements styling */
+        article h2 {
+            margin: 0 0 18px 0; /* Margin değerlerini sırasıyla üst, sağ, alt ve sol olarak belirler. */
+            font-family: "Bebas Neue", cursive; /* Yazı tipini "Bebas Neue" veya benzeri el yazısı fontuna ayarlar. */
+            font-size: 1.9rem; /* Yazı boyutunu 1.9 rem olarak belirler. */
+            letter-spacing: 0.06em; /* Harf aralığını 0.06 em olarak ayarlar. */
+            color: black; /* Metin rengini siyah olarak belirler. */
+            transition: color 0.3s ease-out; /* Renk değişimlerinin (sadece 'color' özelliği) 0.3 saniyede yumuşakça gerçekleşmesini sağlar. */
+        }
 
-
-    /*     .project-content {
-            padding: 0px;
-        } */
-    /* kart resminin özellikleri*/
-    .project-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover; /* resmin boyutunu ve oranı korunurken öğenin tamamını kaplamasını sağlar */
-        border-top-left-radius: 10px; /* köşelere yuvarlak kenar */
-        border-top-right-radius: 10px; /* köşelere yuvarlak kenar */
+    /* tag özellikleri */
+    figure {
+        margin: 0;
+        padding: 0;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
     }
 
-    h2 {
-        text-align: center;
-        color: aqua;
+    article img {
+        max-width: 100%;
+        transform-origin: center;
+        transform: scale(var(--img-scale));
+        transition: transform 0.4s ease-in-out;
     }
 
-    /* responsive için genişlik ayarlaması */
-    media (max-width: 768px) {
-        .project-item
+    .article-body {
+        padding: 24px;
+    }
+
+    /* article tag özellikleri */
+    article a {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        color: #28666e;
+    }
+
+        article a:focus {
+            outline: 1px dotted #28666e;
+        }
+
+        article a .icon {
+            min-width: 24px; /* İkonun minimum genişliğini 24 piksel olarak ayarlar. */
+            width: 24px; /* İkonun genişliğini 24 piksel olarak ayarlar. */
+            height: 24px; /* İkonun yüksekliğini 24 piksel olarak ayarlar. */
+            margin-left: 5px; /* Sol kenardan 5 piksel boşluk bırakır. */
+            transform: translateX(var(--link-icon-translate)); /* İkonu yatay eksende belirli bir mesafe kadar kaydırır. */
+            opacity: var(--link-icon-opacity); /* İkonun opaklığını belirler. */
+            transition: all 0.3s; /* Tüm stil özelliklerinde 0.3 saniyelik yumuşak geçiş sağlar. */
+        }
+
+    article:has(:hover, :focus) {
+        --img-scale: 1.1;
+        --title-color: #28666e;
+        --link-icon-translate: 0;
+        --link-icon-opacity: 1;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    /* gövde içeriği */
+    body {
+        margin: 0;
+        font-family: "Figtree", sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+        min-height: 100vh;
+    }
+
+    /* article div içeriği */
+    .articles {
+        display: grid;
+        max-width: 1200px;
+        margin-inline: auto;
+        padding-inline: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+    }
+
+    media screen and (max-width: 960px) {
+        article
 
     {
-        width: calc(50% - 30px); /* Kartların genişliği 100% olacak şekilde ayarlanır */
+        container: card/inline-size;
+    }
+
+    /* article-body div içeriği */
+    .article-body p {
+        display: none;
     }
 
     }
 
-    /* buton görevi gören a tag'i özelliği*/
-    .container {
-        display: flex; /*sırala*/
-        justify-content: center; /* Yatay olarak ortalar */
-        /*         align-items: center; /* Dikey olarak ortalar */ */
+    container card (min-width: 380px) {
+        .article-wrapper
+
+    {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 16px;
     }
 
+    /* article-body div içeriği */
+    .article-body {
+        padding-left: 0;
+    }
+
+    figure {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+        figure img {
+            height: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+    }
+
+    .sr-only:not(:focus):not(:active) { /* Ekran okuyucuları için görünmez hale getirir, ancak odaklanılmadığı ve aktif olmadığı durumda görünür hale gelir. */
+        clip: rect(0 0 0 0); /* Öğeyi görsel olarak tamamen gizler. */
+        clip-path: inset(50%); /* Öğenin içeriğini gizler. */
+        height: 1px; /* Yüksekliği 1 piksel olarak ayarlar. */
+        overflow: hidden; /* Taşan içeriği gizler. */
+        position: absolute; /* Pozisyonunu mutlaka belirtilen bir üst öğeye göre ayarlar. */
+        white-space: nowrap; /* Metinlerin satır atlamamasını sağlar. */
+        width: 1px; /* Genişliği 1 piksel olarak ayarlar. */
+    }
+
+
+    p {
+        color: black;
+    }
 </style>
 
-<br />
-<br />
-<h2>Benim Projelerim</h2>
-<br />
-<br />
-<br />
-<div class="project-grid">
+<div class="articles">
     @foreach (var project in Model)
     {
-        <div class="project-item">
-            <div class="project-content">
-                <img src="/@project.ImagePath" alt="@project.Topic" class="project-image" />
-                <br />
-                <br />
-                <h2>@project.Topic</h2>
-                <p>Açıklama: @project.Description</p>
-                @if (project.ProjectStatus == ProjectStatus.Completed)
-                {
-                    <p style="color:green">Status: @project.ProjectStatus</p>
-                }
-                else
-                {
-                    <p style="color:red">Status: @project.ProjectStatus</p>
-                }
-                <div class="container">
-                    <a href="@Url.Action("GetProjectDetail", "Project", new { projectId = project.Id })" class="btn btn-primary">Detaylı Bak</a>
+        <article onclick="window.location='@Url.Action("GetProjectDetail", "Project", new { projectId = project.Id })';" style="cursor:pointer;">
+            <div class="article-wrapper">
+                <figure>
+                    <img src="/@project.ImagePath" alt="@project.Topic" />
+                </figure>
+                <div class="article-body">
+                    <h2>@project.Topic</h2>
+                    <p>@project.Description</p>
+                    <a href="#" class="read-more">
+                        Detalı bakmak için <span class="sr-only">about @project.Topic</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
     }
 </div>

@@ -28,6 +28,12 @@ namespace BlogWeb.Mvc.Controllers
             return View();
         }
 
+        /// <summary>
+        /// kayıt yapılan uçnokta 
+        /// </summary>
+        /// <param name="registerViewModel"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Register")]
         [ValidateAntiForgeryToken]
@@ -59,6 +65,12 @@ namespace BlogWeb.Mvc.Controllers
             return View();
         }
 
+        /// <summary>
+        /// giriş yapılan uç nokta
+        /// </summary>
+        /// <param name="loginViewModel"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Login")]
         [ValidateAntiForgeryToken]
@@ -104,7 +116,10 @@ namespace BlogWeb.Mvc.Controllers
         }
 
 
-
+        /// <summary>
+        /// çıkış yapılan uçnokta
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Logout")]
         public async Task<IActionResult> Logout()
@@ -122,7 +137,10 @@ namespace BlogWeb.Mvc.Controllers
             return View("Login");
         }
 
-
+        /// <summary>
+        /// hakkında tablosundan claims bilgilerini getirir
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("About")]
         public async Task<IActionResult> About()

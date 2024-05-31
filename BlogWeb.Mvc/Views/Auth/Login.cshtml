@@ -1,121 +1,165 @@
 ﻿@using BlogWeb.Mvc.Models.ViewModels
-@* @{
-    Layout = "_Layout";
-}
- *@
-@model LoginViewModel
+ @model LoginViewModel
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        /* Sayfanın gövde style özelliği */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            margin: 0;
+    <!-- Design by foolishdeveloper.com -->
+    <title>Glassmorphism login Form Tutorial in html css</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+        /* tüm eleanların elementleri (pseudo-elementler)*/
+        *,
+        *:before,
+        *:after {
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box; /* elemanın genişlik ve yükseklik değerlerini */
         }
 
-        /* container div'inin style özelliği */
-        .container {
-            margin: 8% auto; /* Margini yeniden düzenlendi */
-            background-color: #fff;
-            padding: 2%;
-            border-radius: 8px;
-            color: black;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 400px;
-        }
-            /* containerdaki başlığın style özelliği */
-            .container h2 {
-                margin-bottom: 20px;
-                text-align: center;
-            }
-
-        /* input-group style özellikleri */
-        .input-group {
-            margin-bottom: 15px;
+        /* gövde özelliği */
+        body {
+            background-color: #080710;
         }
 
-            /* input-group içindeki label style özellikleri */
-            .input-group label {
-                display: block;
-                color: black;
-                margin-bottom: 5px;
+        /* div'in özellikleri */
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%,-50%); /* Elemanın kendisini, genişliğinin ve yüksekliğinin yarısı kadar sola ve yukarıya kaydırır.
+                 */
+            top: 50%; /* üst kenarını, ana elemanın yüksekliğinin ortasına yerleştirir */
+            left: 50%; /* sol kenarını, ana elemanın genişliğinin ortasına yerleştirir */
+        }
+
+            /* container içindeki shape class'ının özelliği */
+            .background .shape {
+                height: 200px;
+                width: 200px;
+                position: absolute;
+                border-radius: 50%;
             }
 
+        /* yuvarlak tasarımın özellikleri */
+        .shape:first-child {
+            background: linear-gradient( #1845ad, #23a2f6 );
+            left: -80px;
+            top: -80px;
+        }
 
-            /* input-group içindeki input style özellikleri */
-            .input-group input {
-                width: calc(100% - 16px);
-                padding: 8px;
-                color: black;
-                border-radius: 4px;
-                border: 1px solid #ccc;
+        .shape:last-child {
+            background: linear-gradient( to right, #ff512f, #f09819 );
+            right: -30px;
+            bottom: -80px;
+        }
+
+        /* from ve inputların özellikleri*/
+        form {
+            height: 470px;
+            width: 400px;
+            background-color: rgba(255,255,255,0.13);
+            position: absolute; /* belge akışında nasıl yerleştirileceğini */
+            transform: translate(-50%,-50%); /* Elemanın kendisini, genişliğinin ve yüksekliğinin yarısı kadar sola ve yukarıya kaydırır.
+         */
+            top: 50%; /* üst kenarını, ana elemanın yüksekliğinin ortasına yerleştirir */
+            left: 50%; /* sol kenarını, ana elemanın genişliğinin ortasına yerleştirir */
+            border-radius: 10px;
+            backdrop-filter: blur(10px); /* arka planın nasıl görüntüleneceği */
+            border: 2px solid rgba(255,255,255,0.1); /* kenarlarını tanımlamak için */
+            box-shadow: 0 0 40px rgba(8,7,16,0.6); /* gölge eklemek için */
+            padding: 50px 35px;
+        }
+
+            form * {
+                font-family: 'Poppins',sans-serif;
+                color: #ffffff;
+                letter-spacing: 0.5px;
+                outline: none;
+                border: none;
             }
 
-        /* Buton style özellikleri */
-        button {
-            width: 100%;
-            max-width: 250px;
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
+            /* from içindeki başlıların özellikleri */
+            form h3 {
+                font-size: 32px;
+                font-weight: 500;
+                line-height: 42px; /* Satır yüksekliğini belirler */
+                text-align: center; /* yatay olarak hizalar */
+            }
+
+        /* label özelliği */
+        label {
             display: block;
-            margin: 0 auto;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500; /* Satır yüksekliğini belirler */
         }
 
-            /* Buton hover özelliği*/
-            button:hover {
-                background-color: #0056b3;
-            }
-
-        /* Başlık style'ı*/
-        h2 {
-            color: black;
+        /* Input özellikleri */
+        input {
+            display: block; /* elemanının nasıl yerleştirileceği */
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.07);
+            border-radius: 3px; /*köşelerini yuvarlatmak için */
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300; /* metnin kalınlığı*/
         }
 
-        /* 480 den küçük mobil cihazlar uygulanacak stil özelliklerini belirtir */
-        media (max-width: 480px) {
-            .container
-
-        {
-            padding: 10px;
-            margin: 5% auto;
+        ::placeholder {
+            color: #e5e5e5;
         }
 
+        /* buton özellikleri */
+        button {
+            margin-top: 50px; /* üstten boşluk */
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600; /* metnin kalınlığı*/
+            border-radius: 5px; /*köşelerini yuvarlatmak için */
+            cursor: pointer;
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <form asp-action="Login" asp-controller="Auth" asp-route-returnUrl="@Context.Request.Path" method="post">
-            <h2>Login</h2>
-            <input type="hidden" name="returnUrl" value="" />
-            <div class="input-group">
-                <label asp-for="Email" for="email">Email</label>
-                <input asp-for="Email" type="email" id="email" name="email" required>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+
+        <form asp-action="Login" asp-controller="Auth" method="post">
+            <h3>Giriş Yap</h3>
+
+            <div>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" placeholder="Email adresiniz" id="username">
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="input-group">
-                <label asp-for="Password" for="password">Password:</label>
-                <input asp-for="Password" type="password" id="password" name="password" required>
+
+            <div>
+                <label asp-for="Password">Şifre</label>
+                <input asp-for="Password" placeholder="Şifreniz" id="password" type="password">
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <button type="submit">Login</button>
+
+            <br />
+
+            <button type="submit">Giriş Yap</button>
         </form>
     </div>
-    <script src="~/js/site.js"></script>
-    <script src="~/js/notification.js"></script>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
 </body>
 </html>

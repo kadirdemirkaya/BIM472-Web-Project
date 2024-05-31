@@ -12,6 +12,11 @@ namespace BlogWeb.Mvc.Controllers
 {
     public class HomeController(IMediator _mediatr) : Controller
     {
+        /// <summary>
+        /// Tüm makalelerin anasayfaya geldiði uç nokta
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(string? category = null)
         {
             List<ArticleModel> articleModels = new();

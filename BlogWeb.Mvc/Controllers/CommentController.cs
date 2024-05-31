@@ -10,6 +10,12 @@ namespace BlogWeb.Mvc.Controllers
 {
     public class CommentController(IMediator _mediator, UserManager<User> _userManager, NotificationService _notificationService) : BaseController
     {
+        /// <summary>
+        /// Makaleye yorum ekleme uçnoktası 
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <param name="comment"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("AddCommentByArticle")]
         [ValidateAntiForgeryToken] // (Cross-Site Request Forgery) 
