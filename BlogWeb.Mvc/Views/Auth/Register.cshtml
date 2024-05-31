@@ -58,19 +58,18 @@
 
         /* from ve inputların özellikleri*/
         form {
-            height: 550px;
+            height: 520px;
             width: 400px;
             background-color: rgba(255,255,255,0.13);
             position: absolute; /* belge akışında nasıl yerleştirileceğini */
-            transform: translate(-50%,-50%); /* Elemanın kendisini, genişliğinin ve yüksekliğinin yarısı kadar sola ve yukarıya kaydırır.
-                                 */
+            transform: translate(-50%,-50%); /* Elemanın kendisini, genişliğinin ve yüksekliğinin yarısı kadar sola ve yukarıya kaydırır*/
             top: 50%; /* üst kenarını, ana elemanın yüksekliğinin ortasına yerleştirir */
             left: 50%; /* sol kenarını, ana elemanın genişliğinin ortasına yerleştirir */
             border-radius: 10px;
             backdrop-filter: blur(10px); /* arka planın nasıl görüntüleneceği */
             border: 2px solid rgba(255,255,255,0.1); /* kenarlarını tanımlamak için */
             box-shadow: 0 0 40px rgba(8,7,16,0.6); /* gölge eklemek için */
-            padding: 50px 35px;
+            padding: 45px 35px;
         }
 
             form * {
@@ -123,6 +122,37 @@
             font-weight: 600; /* metnin kalınlığı*/
             border-radius: 5px; /*köşelerini yuvarlatmak için */
             cursor: pointer;
+        }
+
+        /* Küçük cihazlar (tabletler, 768px ve daha küçük) */
+        media (max-width: 767.98px) {
+            /* Buraya isteğe bağlı özel stiller ekleyebilirsin */
+        }
+
+        /* Orta boy cihazlar (dizüstü bilgisayarlar, 992px ve daha küçük) */
+        media (max-width: 991.98px) {
+            /* Buraya isteğe bağlı özel stiller ekleyebilirsin */
+        }
+
+        /* Büyük cihazlar (masaüstü bilgisayarlar, 1200px ve daha küçük) */
+        media (max-width: 1199.98px) {
+            /* Buraya isteğe bağlı özel stiller ekleyebilirsin */
+        }
+
+        header {
+            position: fixed; /* Header'ın sabit olmasını sağla */
+            top: 0; /* Sayfanın üst kenarına yerleştir */
+            left: 0; /* Sayfanın sol kenarına yerleştir */
+            width: 100%; /* Header'ın genişliği %100 olsun */
+            background-color: rgba(0, 0, 0, 0.8); /* Header'ın arka plan rengi */
+            z-index: 1000; /* Header'ın diğer elementlerin üzerinde olmasını sağla */
+            padding: 10px 20px; /* Header iç kenar boşluğunu ayarla */
+        }
+
+        /* Form stilleri */
+        .background {
+            margin-top: 70px; /* Formun üst boşluğunu ayarla */
+            /* Diğer stiller */
         }
 
     </style>

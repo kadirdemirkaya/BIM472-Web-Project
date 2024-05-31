@@ -32,7 +32,7 @@
             height: 520px;
             position: absolute;
             transform: translate(-50%,-50%); /* Elemanın kendisini, genişliğinin ve yüksekliğinin yarısı kadar sola ve yukarıya kaydırır.
-                 */
+                                 */
             top: 50%; /* üst kenarını, ana elemanın yüksekliğinin ortasına yerleştirir */
             left: 50%; /* sol kenarını, ana elemanın genişliğinin ortasına yerleştirir */
         }
@@ -65,7 +65,7 @@
             background-color: rgba(255,255,255,0.13);
             position: absolute; /* belge akışında nasıl yerleştirileceğini */
             transform: translate(-50%,-50%); /* Elemanın kendisini, genişliğinin ve yüksekliğinin yarısı kadar sola ve yukarıya kaydırır.
-         */
+                         */
             top: 50%; /* üst kenarını, ana elemanın yüksekliğinin ortasına yerleştirir */
             left: 50%; /* sol kenarını, ana elemanın genişliğinin ortasına yerleştirir */
             border-radius: 10px;
@@ -127,6 +127,58 @@
             font-weight: 600; /* metnin kalınlığı*/
             border-radius: 5px; /*köşelerini yuvarlatmak için */
             cursor: pointer;
+        }
+
+        /* Ekstra küçük cihazlar (telefonlar, 576px ve daha küçük) */
+        media (max-width: 575.98px) {
+            .background
+
+        {
+            width: 90%; /* Ekranın genişliğinin %90'ı kadar olacak */
+            height: auto; /* Yükseklik otomatik ayarlanacak */
+            padding: 20px; /* Formun iç kenar boşluğunu ayarla */
+        }
+
+        form {
+            width: 100%; /* Formun genişliği %100 olacak */
+            padding: 30px 20px; /* Form iç kenar boşluğunu ayarla */
+        }
+
+        button {
+            margin-top: 30px; /* Butonun üst boşluğunu ayarla */
+        }
+
+        }
+
+        /* Küçük cihazlar (tabletler, 768px ve daha küçük) */
+        media (max-width: 767.98px) {
+            /* Buraya isteğe bağlı özel stiller ekleyebilirsin */
+        }
+
+        /* Orta boy cihazlar (dizüstü bilgisayarlar, 992px ve daha küçük) */
+        media (max-width: 991.98px) {
+            /* Buraya isteğe bağlı özel stiller ekleyebilirsin */
+        }
+
+        /* Büyük cihazlar (masaüstü bilgisayarlar, 1200px ve daha küçük) */
+        media (max-width: 1199.98px) {
+            /* Buraya isteğe bağlı özel stiller ekleyebilirsin */
+        }
+
+        header {
+            position: fixed; /* Header'ın sabit olmasını sağla */
+            top: 0; /* Sayfanın üst kenarına yerleştir */
+            left: 0; /* Sayfanın sol kenarına yerleştir */
+            width: 100%; /* Header'ın genişliği %100 olsun */
+            background-color: rgba(0, 0, 0, 0.8); /* Header'ın arka plan rengi */
+            z-index: 1000; /* Header'ın diğer elementlerin üzerinde olmasını sağla */
+            padding: 10px 20px; /* Header iç kenar boşluğunu ayarla */
+        }
+
+        /* Form stilleri */
+        .background {
+            margin-top: 70px; /* Formun üst boşluğunu ayarla */
+            /* Diğer stiller */
         }
     </style>
 </head>
