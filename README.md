@@ -36,6 +36,8 @@ Sonra proje terminale bu kod yazılarak ayağa kaldırılabilir.
 
   
 ## Resimler
-![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/8588d4ea-cf7f-4aa1-907d-5c775d140772)
-![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/6ecb5ac6-34ce-4243-b57f-4366b5ce56e6)
-![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/06aad008-1c5e-48fb-90a3-545d78391350)
+![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/fc9f8f77-212a-46e6-9376-e017aec04d6c)
+![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/1b8a3f86-3d47-4a64-9596-f85e68bc17d9)
+![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/4bf7367a-e539-4ba4-b291-64e6cb335e1d)
+![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/0abcba57-1eee-494a-8260-7c9d5b7b7332)
+
