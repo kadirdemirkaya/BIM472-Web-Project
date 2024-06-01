@@ -1,7 +1,7 @@
 ﻿@using BlogWeb.Mvc.Models.Enums
 @model BlogWeb.Mvc.Models.ViewModels.AddProjectViewModel
 
-<style>
+@* <style>
     body {
         background-color: #1e1e1e;
         color: #c9d1d9;
@@ -11,6 +11,114 @@
     form {
         width: 500px;
         margin: 0 auto 0 auto;
+        padding: 20px;
+        border: 1px solid #444c56;
+        border-radius: 5px;
+        background-color: #2d333b;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #adbac7;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #444c56;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: #22272e;
+        color: #adbac7;
+    }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        input[type="file"]:focus {
+            border-color: #539bf5;
+            outline: none;
+            box-shadow: 0 0 5px rgba(83, 155, 245, 0.5);
+        }
+
+    button[type="submit"] {
+        background-color: #539bf5;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #4180d7;
+        }
+
+        button[type="submit"]:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(83, 155, 245, 0.5);
+        }
+</style>
+
+<form method="post" enctype="multipart/form-data" action="@Url.Action("AddProject", "Project")">
+    <div>
+        <label for="formFile">Proje Resmi:</label>
+        <input type="file" id="formFile" name="formFile" />
+    </div>
+    <div>
+        <label asp-for="Topic">Başlık:</label>
+        <input asp-for="Topic" type="text" id="Topic" name="Topic" />
+    </div>
+    <div>
+        <label asp-for="ShortDescription">Kısa Açıklama:</label>
+        <input asp-for="ShortDescription" type="text" id="ShortDescription" name="ShortDescription" />
+    </div>
+    <div>
+        <label asp-for="LongDescription">Uzun Açıklama:</label>
+        <textarea asp-for="LongDescription" id="LongDescription" name="LongDescription"></textarea>
+    </div>
+    <div class="input-container">
+        <label asp-for="ProjectStatus">Proje Durumu:</label>
+        <select asp-for="ProjectStatus" class="form-control">
+            <option value="Completed" selected>Tamamlandı</option>
+            <option value="Continues">Devam Ediyor</option>
+            <option value="NotCompleted">Tamamlanmadı</option>
+        </select>
+    </div>
+    <br />
+    <div>
+        <label asp-for="Goals">Hedefler:</label>
+        <textarea asp-for="Goals" id="Goals" name="Goals"></textarea>
+    </div>
+    <div>
+        <label asp-for="TechnologiesUsed">Kullanılan Teknolojiler:</label>
+        <input asp-for="TechnologiesUsed" type="text" id="TechnologiesUsed" name="TechnologiesUsed" />
+    </div>
+    <div>
+        <label asp-for="Links">Linkler:</label>
+        <input asp-for="Links" type="text" id="Links" name="Links" />
+    </div>
+    <button type="submit">Projeyi Ekle</button>
+</form> *@
+
+
+
+<style>
+    body {
+        background-color: #1e1e1e;
+        color: #c9d1d9;
+        font-family: Arial, sans-serif;
+    }
+
+    form {
+        width: 500px;
+        margin: 50px auto; /* Yatay hizalama için margin kullanıyoruz */
         padding: 20px;
         border: 1px solid #444c56;
         border-radius: 5px;
