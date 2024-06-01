@@ -12,17 +12,22 @@ Bu proje BIM472 dersi için geliştirilmiş kişisel bir blog sitesidir.
 
 Bu projeyi çalıştırmak için şu adımları uygulayabilirsiniz.
 
-appsettings.json file içeriği değiştirilmeli
+Poreyi tanımlayacağınız dosya yoluna girip aşağıdaki kodu terminale yazarak klonlayabilirsiniz
+```bash
+ https://github.com/kadirdemirkaya/BIM472-Web-Project.git
+```
+
+ardından appsettings.json file içeriği değiştirilmeli
 ```bash
    "SqlServerOptions": {
     "SqlConnection": "Mssql Url"
     }
 ```
-Hazır migration'lar uygulanmalı termainali açıp şu komutlar yazılabilir
+Hazır migration'lar uygulanmalı termainali açıp şu komutlar yazılmalı
 ```bash
     dotnet ef database update
 ```
-Sonra proje terminale bu kod yazılarak ayağa kaldırılabilir.
+Sonra proje terminale aşağıdaki kod yazılarak ayağa kaldırılabilir.
 ```bash
     dotnet run
 ```
