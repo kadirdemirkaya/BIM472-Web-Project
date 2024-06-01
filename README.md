@@ -4,7 +4,7 @@
 Bu proje BIM472 dersi için geliştirilmiş kişisel bir blog sitesidir.
 
 - .Net Core MVC ile geliştirilmiştir.
-- Authentication ve Authorizaiton ile güvenlik sağlanmıştır.
+- Authentication ve Authorization ile güvenlik sağlanmıştır.
 - CQRS - MediatR uygulanmıştır.
 - File içeriği ile isteklere Log'lanmıştır.
 
@@ -38,6 +38,6 @@ Sonra proje terminale bu kod yazılarak ayağa kaldırılabilir.
 ## Resimler
 ![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/fc9f8f77-212a-46e6-9376-e017aec04d6c)
 ![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/1b8a3f86-3d47-4a64-9596-f85e68bc17d9)
-![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/4bf7367a-e539-4ba4-b291-64e6cb335e1d)
+![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/482172d2-6e04-48be-8e4a-f2f58bd941a6)
 ![image](https://github.com/kadirdemirkaya/BIM472-Web-Project/assets/126807887/0abcba57-1eee-494a-8260-7c9d5b7b7332)
 
