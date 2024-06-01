@@ -1,4 +1,7 @@
-﻿<style>
+﻿@using System.Security.Claims
+ @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<style>
 
     /* article etiketi özellikleri */
     article {
@@ -165,10 +168,51 @@
     p {
         color: black;
     }
+
+
+    .add-button {
+        position: fixed;
+        right: 20px;
+        text-decoration: none; /* Bağlantı alt çizgisini kaldır */
+        top: 90px; /* Yukarıdan 10 piksel uzaklık */
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 </style>
 
 <br />
 <h2 style="text-align:center;color:aqua">Projelerim</h2>
+@* @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+{
+    string emailVal;
+    var emailClaim = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+
+    if (emailClaim != null)
+    {
+        emailVal = emailClaim.Value;
+        if (emailVal.Contains(":"))
+        {
+            emailVal = emailVal.Split(':')[1].Trim();
+        }
+    }
+    else
+    {
+        emailVal = string.Empty;
+    }
+    if (emailVal == "kadir@gmail.com")
+    {
+        <form enctype="multipart/form-data" asp-action="AddProject" asp-controller="Project">
+            <!-- Form alanları buraya gelecek -->
+            <button type="submit" class="add-button">Proje Ekle</button>
+        </form>
+    }
+} *@
+
+
 <br />
 <div class="articles">
     @foreach (var project in Model)

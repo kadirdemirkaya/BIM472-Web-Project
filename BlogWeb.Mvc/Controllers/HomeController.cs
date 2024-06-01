@@ -22,7 +22,6 @@ namespace BlogWeb.Mvc.Controllers
             List<ArticleModel> articleModels = new();
             if (category is not null)
             {
-
                 if (category == "all")
                 {
                     GetAllArticlesQueryRequest getAllArticlesQueryRequest = new();

@@ -19,7 +19,7 @@ using System.Security.Claims;
 namespace BlogWeb.Mvc.Controllers
 {
     [AllowAnonymous]
-    public class AuthController(IUserServive _userServive, UserManager<User> _userManager, SignInManager<User> _signInManager, IMediator _mediatr,IToastNotification _toastNotification) : BaseController
+    public class AuthController(IUserServive _userServive, UserManager<User> _userManager, SignInManager<User> _signInManager, IMediator _mediatr, IToastNotification _toastNotification) : BaseController
     {
         [HttpGet]
         [Route("Register")]
@@ -86,13 +86,28 @@ namespace BlogWeb.Mvc.Controllers
             if (loginCommandResponse.UserResponseModel.IsSuccess is false)
                 return View();
 
-            var claims = new List<Claim>
+            List<Claim> claims = new();
+            if (loginViewModel.Email != "kadir@gmail.com")
             {
-                        new Claim(ClaimTypes.Name, loginViewModel.Email),
-                        new Claim(ClaimTypes.Email, loginViewModel.Email),
-                        new Claim(ClaimTypes.Role, Constant.Role.User),
-                        new Claim("Email",loginViewModel.Email),
-            };
+                claims = new List<Claim>
+                {
+                            new Claim(ClaimTypes.Name, loginViewModel.Email),
+                            new Claim(ClaimTypes.Email, loginViewModel.Email),
+                            new Claim(ClaimTypes.Role, Constant.Role.User),
+                            new Claim("Email",loginViewModel.Email),
+                };
+            }
+            else
+            {
+                claims = new List<Claim>
+                {
+                            new Claim(ClaimTypes.Name, loginViewModel.Email),
+                            new Claim(ClaimTypes.Email, loginViewModel.Email),
+                            new Claim(ClaimTypes.Role, Constant.Role.Admin),
+                            new Claim("Email",loginViewModel.Email),
+                };
+            }
+            
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -126,11 +141,11 @@ namespace BlogWeb.Mvc.Controllers
         {
             var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
 
-            if (email is null)
-                return View("Login");
-
             await _signInManager.SignOutAsync();
             await HttpContext.SignOutAsync();
+
+            if (email is null)
+                return View("Login");
 
             _toastNotification.AddSuccessToastMessage("Çıkış işlemi başarılı");
 

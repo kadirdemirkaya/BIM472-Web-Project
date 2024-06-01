@@ -1,0 +1,104 @@
+﻿@using BlogWeb.Mvc.Models.ViewModels.Project
+@model List<ProjectModel>
+
+
+<style>
+    .table-container {
+        max-width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .delete-button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+    .add-button {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 30px;
+        text-decoration: none; /* Alt çizgiyi kaldırır */
+        margin-bottom: 20px; /* Buton ile tablo arasında boşluk bırakır */
+    }
+
+        .add-button:hover {
+            background-color: #45a049;
+        }
+
+    .completed-status {
+        color: green;
+    }
+
+    .continues-status {
+        color: yellow;
+    }
+
+    .notcompleted-status {
+        color: red;
+    }
+
+</style>
+
+<div>
+    <a class="add-button" style="text-align:center;" href="@Url.Action("AddProject", "Project")">Proje ekle</a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model)
+            {
+                <tr>
+                    <td>@project.Topic</td>
+                    <td>@project.Description</td>
+                    <td>
+                        <img src="/@project.ImagePath" width="100" />
+                    </td>
+                    <td class="@(project.ProjectStatus.ToString().ToLower())-status">@project.ProjectStatus.ToString()</td>
+                    <td>
+                        <form asp-action="DeleteProject" asp-controller="Admin" method="post" style="display:inline;">
+                            <input type="hidden" name="projectId" value="@project.Id" />
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

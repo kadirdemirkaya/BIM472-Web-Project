@@ -72,6 +72,27 @@
     <header>
         <nav>
             <div class="nav-left">
+                @{
+                    string emailVal;
+                    var emailClaim = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+
+                    if (emailClaim != null)
+                    {
+                        emailVal = emailClaim.Value;
+                        if (emailVal.Contains(":"))
+                        {
+                            emailVal = emailVal.Split(':')[1].Trim();
+                        }
+                    }
+                    else
+                    {
+                        emailVal = string.Empty;
+                    }
+                    if (emailVal == "kadir@gmail.com")
+                    {
+                        <a asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                    }
+                }
                 <a asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                 <a asp-area="" asp-controller="Auth" asp-action="About">Hakkımda</a>
                 <a asp-area="" asp-controller="Project" asp-action="GetAllProject">Projelerim</a>

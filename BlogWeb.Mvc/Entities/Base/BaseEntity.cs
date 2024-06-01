@@ -14,7 +14,7 @@ namespace BlogWeb.Mvc.Entities.Base
 
         public BaseEntity()
         {
-            
+
         }
         public void SetId(Guid id)
         {
@@ -26,6 +26,11 @@ namespace BlogWeb.Mvc.Entities.Base
             Id = Guid.Parse(id);
         }
 
+        public void SetChangedDate(DateTime dateTime)
+        {
+            ChangedAt = dateTime;
+        }
+
         public void AssignGuidToId()
         {
             Id = Guid.NewGuid();
@@ -34,6 +39,6 @@ namespace BlogWeb.Mvc.Entities.Base
         public void SetActiveState(bool active)
         {
             IsActive = active;
-        }   
+        }
     }
 }

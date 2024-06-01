@@ -46,6 +46,18 @@ namespace BlogWeb.Mvc.Entities
         public static Project Create(Guid id, string topic, string description, string imagePath, ProjectStatus projectStatus, ProjectDetail projecttDetail)
           => new(id, topic, description, imagePath, projectStatus, projecttDetail);
 
+        public void SetProject(Project projects)
+        {
+            Topic = projects.Topic;
+            SetChangedDate(DateTime.Now);
+            Description = projects.Description;
+            ProjectDetail = projects.ProjectDetail;
+            ImagePath = projects.ImagePath;
+            SetActiveState(projects.IsActive);
+            ProjectStatus = projects.ProjectStatus;
+            ProjectDetailId = projects.ProjectDetailId;
+        }
+
         //public void AddProjectDetails(string topic, string goals, string description, string imagePath, string links, string technologiesUsed, Guid projectId)
         //{
         //    ProjectDetails.Add(ProjectDetail.Create(topic, goals, description, imagePath, links, technologiesUsed, projectId));

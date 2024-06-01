@@ -8,7 +8,7 @@ namespace BlogWeb.Mvc.Features.Queries.Project.GetAllProject
     {
         public async Task<List<ProjectModel>> Handle(GetAllProjectQueryRequest request, CancellationToken cancellationToken)
         {
-            List<Entities.Project> projects = await _projectRepository.GetAllAsync();
+            List<Entities.Project> projects = await _projectRepository.GetAllAsync(p => p.IsActive == true);
             List<ProjectModel> projectModels = new();
 
             foreach (var project in projects)
