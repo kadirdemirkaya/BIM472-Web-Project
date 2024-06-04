@@ -5,8 +5,10 @@ Bu proje BIM472 dersi için geliştirilmiş kişisel bir blog sitesidir.
 
 - .Net Core MVC ile geliştirilmiştir.
 - Authentication ve Authorization ile güvenlik sağlanmıştır.
+- Role bazlı endpointler yönetilmiştir.
 - CQRS - MediatR uygulanmıştır.
 - File içeriği ile isteklere Log'lanmıştır.
+- Veritabanı olarak SqlServer kullanılmıştır.
 
 ## Dağıtım
 
@@ -35,7 +37,7 @@ Sonra proje terminale aşağıdaki kod yazılarak ayağa kaldırılabilir.
   
 ## Kullanılan Teknolojiler
 
-**İstemci:** Html, CSS, Typescript 
+**İstemci:** Html, CSS 
 
 **Sunucu:** .Net Core, Mssql
 
