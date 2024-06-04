@@ -10,6 +10,9 @@ Bu proje BIM472 dersi için geliştirilmiş kişisel bir blog sitesidir.
 - File içeriği ile isteklere Log'lanmıştır.
 - Veritabanı olarak SqlServer kullanılmıştır.
 
+
+=> Proje linki : https://github.com/kadirdemirkaya/BIM472-Web-Project
+
 ## Dağıtım
 
 Bu projeyi çalıştırmak için şu adımları uygulayabilirsiniz.
