@@ -42,7 +42,7 @@ Sonra proje terminale aşağıdaki kod yazılarak ayağa kaldırılabilir.
 
 **İstemci:** Html, CSS 
 
-**Sunucu:** .Net Core, Mssql
+**Sunucu:** .Net Core MVC, SqlServer
 
   
 ## Resimler
